@@ -1,0 +1,385 @@
+Prerequisites:
+-Fully clean dust from PC internals
+-Fresh Install Windows 11 23H2 WITHOUT INTERNET
+--Shift + F10, type OOBE\BYPASSNRO
+-Select English (World) as language to not install bloatware
+
+--BIOS Optimizations/Non-Overclocks--
+fTPM -> Disable
+Re-Size BAR -> Enable
+SVM/Virtualization -> Disable
+Bluetooth -> Disable
+Wi-Fi -> Disable
+WAN Radio -> Disable
+C-states -> Disable
+ECO Mode -> Disable
+Fast Boot -> Disable
+CSM -> Disable
+Secure Boot -> Disable
+Spread Spectrum -> Disable
+
+--ASRock AM5 Bios settings--
+Bluetooth -> Disable
+Wi-Fi -> Disable
+WAN Radio -> Disable
+DRAM Profile Setting -> EXPO/XMP Profile
+
+DRAM Performance Mode -> Aggressive
+--Setting this to aggressive sets VSOC to 1.3v which is overkill. Try 1.20v and set VDDP to 1.10v and test stability. VDDP auto will probably cause instability
+
+IOMMU -> Disable
+PSS Support -> Disabled
+SVM Mode (Virtualization) -> Disabled
+Security Device Support -> Disabled
+Trusted Platform Module -> Disabled
+Pluton Security Processor -> Disabled
+HDMI 2.0 Support -> Disabled (unless you are using HDMI and need HDMI 2.0)
+Thunderbolt Support -> Disabled (unless you are using a thunderbolt-supported USB device)
+Global C-State Control -> Disabled
+ACPI _CST C1 Declaration -> Disabled
+DF Cstates -> Disabled
+Power Supply Idle Control -> Typical Current Idle
+PCIe ARI Support -> Auto
+PCIe ARI Enumeration -> Auto
+FCH Spread Spectrum -> Disabled
+CPPC Dynamic Preferred Cores -> Auto (Or Frequency if you aren't using ProcessLasso to manage your program's priorities)
+ECO Mode -> Disabled
+SoC/Uncore OC Mode -> Enabled
+Auto Driver Installer -> Disabled
+Secure Boot -> Disabled
+Fast Boot -> Disabled
+CSM -> Disabled
+Setup Prompt Timeout -> 1
+
+MUST BOTH BE DISABLED. If you disable Power Down Mode with MCR Enabled, you will blue screen instantly when loading Windows and will probably freeze in the BIOS.
+{
+Memory Context Restore -> Disabled
+Power Down Mode -> Disabled
+}
+
+TSME -> Disabled
+Data Scramble -> Disabled
+RGB LED -> Disabled
+Base Clock Control Mode -> CPU Clock Overclocking
+PCIE Spread Spectrum Clocking -> Disabled
+CPU Spread Spectrum Clocking -> Disabled
+iGPU Configuration -> iGPU Disabled
+
+--Monitor Optimizations (If the settings are available for your monitor)--
+-Game Mode: Enabled
+-OD(Overdrive): Extreme / maximum equivalent (if this causes a lot of ghosting, select a lower value until it goes away. Maximum value = lowest input lag at cost of pixel accuracy/ghosting)
+
+--Windows Tweaks--
+-Disable Core Isolation
+
+-Disable Memory Compression
+--Administrator Powershell -> Disable-MMAgent -mc
+
+-Disable Fast Startup/Fast Boot - uptime in Task Manager resets + allows PC to fully shutdown
+-Rebuild performance counters
+-Set game flags to 211 for DX11 Fullscreen Exclusive
+-QuickCPU - Core parking, Frequency scaling, Turbo boost, Performance -> 100%, click Apply
+-hidusbfn - Set PS5 controller to 1000hz polling rate
+-Enable Fullscreen Optimizations (Windows 11 22H2 and higher versions only)
+-Enable Network Adapter Onboard Processor
+-Disable hardware acceleration in Chrome, Discord, other software (VPN)
+--Disable telemetry in Discord - User Settings -> Privacy & Safety -> Uncheck "Use data to improve discord" and "Use data to personalize my Discord experience"
+-Disable Meltdown/Spectre/Downfall mitigations
+
+-Disable HPET
+1. Open Command Prompt as Administrator
+2. Paste in this command: bcdedit /deletevalue useplatformclock
+(if you get an error, thats completely normal)
+3. Exit out of Command Prompt
+4. Go into Device Manager -> system devices and disable 'High Precision Event Timer'
+5. Restart your PC
+
+--Process Lasso Pro Version Tweaks--
+-Top Menu -> Main Tab
+--Select/checkbox enable on the following settings:
+--ProBalance Enabled
+--SmartTrim Enabled
+
+-Top Menu -> Options -> Control -> Disallowed Processes
+--Add the following processes: "gamebarpresencewriter.exe", "iexplore.exe"
+----Add any other programs or software you do NOT want to be running on your PC at all.
+------Make sure you check the Actions log in case one of your programs is starting itself constantly from being blocked from this list
+
+-Top Menu -> Options -> Tools -> System Timer Resolution
+--Add your own Timer resolution between 0.500 and 0.508. Lower the better, but might result in worse results. Press "Set" button
+--Select "Set at every boot" and "Apply globally"
+----Run MeasureSleep.exe to measure your system timer and ensure it is not returning 1.5ms or higher results
+------A consistent result of 1.0xxx ms is key.
+--------For my system (7800X3D) I am at 0.508 to stabilize my system timer.
+
+-Game .exe (in All processes list) -> Right click, select "Induce performance mode", select "Exclude from ProBalance"
+--Can also select "Induce performance mode" and "Exclude from ProBalance" on other software you use that utilizes heavy resources, such as video rendering software
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mouclass\Parameters
+MouseDataQueueSize = New DWORD32, set to 20 (decimal)
+
+HKEY_CURRENT_USER\Control Panel\Mouse
+--double click "SmoothMouseXCurve" and "SmoothMouseYCurve". Delete all data entries and it should show "zero-length binary value"
+
+HKEY_CURRENT_USER\Control Panel\Desktop -> Win8DpiScaling - change from 0 to 1
+
+1. DDU Nvidia driver
+--Select Device Type: GPU -> Nvidia
+--Options to enable:
+----Prevent downloads of drivers from "Windows update" when "Windows" search for a driver for a device
+
+--Click: Clean and restart
+
+1. Nvidia Debloat - NVCleanstall
+--Install best driver for my hardware
+--Click Next
+--Desktop: Display Driver only
+--Laptop: Check Optimus
+--Optional: USB-C Driver for USB-C monitor output
+
+--Installation Tweaks:
+--Check the following:
+--Disable Installer Telemetry & Advertising
+--Unattended Express Installation + Allow automation reboot, if needed
+--Disable Ansel
+--Show Expert Tweaks
+--Disable Driver Telemetry
+--Disable NVIDIA HD Audio device sleep timer
+--Enable Message Signaled Interrupts
+----Interrupt Priority: High
+--Disable HDCP (if not viewing HDCP content)
+--Use method compatible with Easy-Anti-Cheat
+
+2. CSRSS.exe realtime
+Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions
+
+--CpuPriorityClass Hexadecimal 4
+--IoPriority Hexadecimal 3
+
+3. IRQ0 + IRQ8 priority
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl
+
+IRQ0Priority: DWORD 32-bit
+--Set to 1
+
+IRQ8Priority: DWORD 32-bit
+--Set to 1
+
+Win32PrioritySeparation: DWORD 32-bit
+--With highend CPU (8 Core CPU > 2018 or better):
+----Set to 0x2A
+
+--With mediumend CPU:
+----Set to 0x26 or 0x16 (test to see which is more responsive to you)
+----Tested 7800X3D with 6000MHz CL28, 0x16 and 0x03 felt best for me
+
+0x26 might be better if there are a lot of processes running (i.e. browser + discord)
+--You can test this without rebooting, simply change the value and go back into your game to test responsiveness
+
+5. NvProfileInspector
+
+Find Sync and Refresh Tab
+--GSYNC - Application Mode -> Off
+--GSYNC - Application Requested State -> Off
+--GSYNC - Application State -> Fixed Refresh Rate
+--GSYNC - Global Feature -> Off
+--GSYNC - Global Mode -> Off
+--Maximum Pre-rendered Frames -> 1
+--Ultra low latency - CPL state -> Ultra
+--Ultra low latency - Enabled -> On
+--Vertical Sync -> Force off
+
+Find Antialiasing Tab
+--Antialiasing - Gamma Correction -> Off
+--Antialiasing - Line Gamma -> Disabled
+
+Find Texture Filtering Tab
+--Anisotropic Filter - Optimization -> On
+--Anisotropic Filter - Sample Optimization -> On
+--Prevent Anisotropic Filtering -> On
+
+Find Common Tab
+--CUDA-Force P2 State -> Off
+
+Find Other Tab
+--NVIDIA Predefined Ansel Usage -> ANSEL_ALLOW_DISALLOWED
+
+--Memory Allocation Policy -> WKS_MEMORY_ALLOCATION_POLICY_MODERATE_PRE_ALLOCATION
+
+--Variable refresh rate -> VSYNCVRRCONTROL_DISABLE
+
+--Click "Apply changes" 2 times and then close the program
+
+6. NVidia Control Panel
+Manage 3D Settings:
+--Antialiasing - Gamma correction: Off
+--Low Latency: Ultra
+--Monitor Technology: Fixed Refresh
+--OpenGL rendering GPU: Select your GPU
+--Power Management Mode: Prefer Maximum Performance
+--Shader Cache Size: Unlimited
+--Texture Filtering - Quality: High Performance
+--Threaded Optimization: On
+
+Program Settings Tab
+--dwm.exe (C:\Windows\System32)
+--explorer.exe (C:\Windows)
+----Scroll down to Power management mode
+----Make sure "Use global setting (Prefer maximum performance) is selected
+
+Configure Surround, PhysX
+--PhysX Settings: Choose your GPU
+
+Change Resolution
+--Select monitor, choose highest refresh rate available
+
+Adjust Desktop Size and Position
+--Scaling: No Scaling
+--Perform scaling on: Display
+--Override the scaling mode set by games and programs: Checked
+
+Set up G-SYNC
+--Enable G-SYNC, G-SYNC Compatible: Unchecked
+
+Adjust video color settings
+--"How do you want to make color adjustments?": With the NVIDIA settings
+--Click "Advanced" Tab
+--Dynamic Range: Full (0-255)
+--Override to Reference Mode: Checked (MAJOR latency improvement)
+
+Adjust video image settings
+--Edge enhancement: Use the NVIDIA setting: 0%
+--Noise reduction: Use the NVIDIA setting: 0%
+--Deinterlacing: Use inverse telecine: Checked
+--RTX video enhancement: Super resolution: Unchecked
+
+Additional GPU Settings
+{
+--Open Device Manager
+--Open Display Adapters
+--Find GPU
+--Right Click -> Properties
+--Details Tab
+--Property: Class Guid
+--Right click, copy the value
+
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class
+--Find the next folder using the GUID you found from device manager
+--Open the next folder: 0000 or 0001, whichever one lists your GPU name
+--New DWORD 32-bit: "DisableDynamicPstate"
+--Set value to 1
+----Notes: This will increase idle power draw, however it will lock your GPU to its maximum frequency to improve latency during gaming. Variable core clocks introduce latency, so locking your GPU core benefits input latency
+}
+
+
+7. Interrupt Affinity Policy Tool
+--2 unique threads for USB xHCI controller (if hyperthreading is enabled)
+--2 unique threads for GPU (if hyperthreading is enabled)
+
+8. Timer Resolution Win11 Fix
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel
+--GlobalTimerResolutionRequests: DWORD 32-bit
+----Set to 1
+--Reboot
+
+Download SetTimerResolution v0.1.3 and MeasureSleep v0.1.6
+https://github.com/amitxv/TimerResolution/releases
+--Place TimerResolution.exe in C:\ root
+
+C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+--Paste SetTimerResolution.exe shortcut
+--Right click, properties
+--Target:
+----High End CPU (9900k or better): C:\SetTimerResolution.exe --resolution 5010 --no-console
+----Medium End CPU: C:\SetTimerResolution.exe --resolution 5040 --no-console
+
+--MeasureSleep.exe (to verify timer resolution has been set properly)
+--Resolution: 0.5010ms or 0.5040 (whichever value you set in the previous step)
+--Slept 1.5ms or less
+
+9. Disable GamebarPresenceWriter (rename exe and stop in regedit)
+https://www.youtube.com/watch?v=cfx5JYcg5BA
+
+10. Bitsum Highest Performance Power Plan
+https://drive.google.com/file/d/1nRgM2oNPW_FnLCwUVMvGIddm-26nUKGo/view?usp=drive_link
+
+--Create "PowerSchemes" folder in C:\
+--Place downloaded file into folder
+--Run command in CMD Admin: powercfg -import C:\PowerSchemes\BitsumHighestPerformance.pow
+
+11. PowerSettingsExplorer
+--Processor performance increase threshold: 0%
+--Processor performance decrease threshold: 0%
+--Processor performance time check interval: set to 5000ms
+--Processor idle demote threshold: set to 100%
+--Processor idle promote threshold: set to 100%
+--Minimum processor state: set to 100%
+--Maximum processor state: set to 100%
+--Processor performance boost mode: Aggressive At Guaranteed
+
+12. Disable MPO (only if you have graphical issues, might fix them)
+Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm
+--New DWORD 32-bit
+--Type "OverlayTestMode"
+--Set Value to 5
+----This might introduce additional latency and should only be disabled on some systems that have graphical anomalies.
+
+13. MSI Util v3: Enable MSI mode on GPU, priority High
+
+14. O&O Shutup 10++
+--Apply recommended settings
+---Scroll through remaining settings and disable more of them if you'd like
+
+15. WPD
+--Disable everything, except for advanced tabs
+
+16. Chris Titus Debloater
+--Click Tweaks
+--Recommended Selections: Desktop/Laptop
+--Uncheck Run OO Shutup (if you already ran OO Shutup)
+
+17. MarkC Mouse Fix - run .reg based on Windows scaling %
+
+Optional:
+--Remove OneDrive
+--Set Classic Right-Click Menu
+--Disable IPv6
+
+--Click Run Tweaks
+
+Optional:
+--Click Config
+--Run System Corruption Scan
+
+16. Enable Game Mode
+--Select Windows Start Button
+--Search "Game Mode Settings"
+--Turn on Game Mode
+
+17. Enable Optimizations for windowed games (Windows 11 22H2 and higher versions)
+--Select Windows Start Button
+--Search "Graphics Settings"
+--Click "Change default graphics settings"
+
+--Enable:
+----Hardware-accelerated GPU scheduling
+----Optimizations for windowed games
+
+18. Network Optimizations
+Power Saving Mode -> Disabled
+Energy Efficient Ethernet -> Disabled
+Green Ethernet -> Disabled
+Ultra Low Power Mode -> Disabled
+Offload (any) -> Disabled
+Receive Buffers -> 2048
+Transmit Buffers -> 4096
+
+19. Windows 11 FSO
+-Utilize Fullscreen Optimization Mode for latency boost and smoothness (mimics fullscreen mode and makes it obsolete)
+[Computer\HKEY_CURRENT_USER\System\GameConfigStore]
+GameDVR_FSEBehavior = 0
+
+
+https://www.tenforums.com/gaming/117377-share-gaming-tweaks-chec-my-comprehensive-list-will-blow-your-mind.html#post1454596
+
+https://sites.google.com/view/melodystweaks/basictweaks

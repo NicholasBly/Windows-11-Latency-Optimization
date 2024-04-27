@@ -1,0 +1,121 @@
+Windows Registry Editor Version 5.00
+
+; CSRSS.exe high priority
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions]
+"CpuPriorityClass"=dword:00000003
+"IoPriority"=dword:00000003
+
+; Fortnite high priority (Only Battleye version will apply)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe\PerfOptions]
+"CpuPriorityClass"=dword:00000003
+"IoPriority"=dword:00000003
+
+; Timer Resolution Win11 Fix
+; After applying, use ProcessLasso's Options -> Tools -> System Timer Resolution option to apply your own global timer.
+; Use 0.508 as your global timer value
+; Enable checkboxes on "Set at every boot" and "Apply globally"
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"GlobalTimerResolutionRequests"=dword:00000001
+
+; Disable Xbox Game DVR and enable fullscreen optimization (Windows 11 22h2 and above only, set FSEBehavior to 2 to disable it otherwise)
+[HKEY_CURRENT_USER\System\GameConfigStore]
+"GameDVR_DXGIHonorFSEWindowsCompatible"=dword:00000000
+"GameDVR_EFSEFeatureFlags"=dword:00000000
+"GameDVR_Enabled"=dword:00000000
+"GameDVR_FSEBehavior"=dword:00000000
+"GameDVR_FSEBehaviorMode"=dword:00000000
+"GameDVR_HonorUserFSEBehaviorMode"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+"LargeSystemCache"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+"IRQ0Priority"=dword:00000001
+"IRQ8Priority"=dword:00000001
+"Win32PrioritySeparation"=dword:00000003
+
+;Disable core isolation memory integrity to fix stuttering and responsiveness
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
+"Enabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Input\Settings\ControllerProcessor\CursorSpeed]
+"CursorUpdateInterval"=dword:00000001
+
+;Mouse latency boost
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Power\Profile\Events\{54533251-82be-4824-96c1-47b60b740d00}\{0DA965DC-8FCF-4c0b-8EFE-8DD5E7BC959A}\{7E01ADEF-81E6-4e1b-8075-56F373584694}]
+"TimeLimitInSeconds"=dword:00000002
+
+;Disable Windows writing current time every 5 seconds to registry
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability]
+"TimeStampInterval"=dword:00000000
+
+;Set mouse data queue size to minimum (default 100 or 0x64)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mouclass\Parameters]
+"MouseDataQueueSize"=dword:00000014
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters]
+"KeyboardDataQueueSize"=dword:00000014
+
+;DPC Tweaks
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"DpcWatchdogProfileOffset"=dword:00000000
+"DpcTimeout"=dword:00000000
+"IdealDpcRate"=dword:00000001
+"MaximumDpcQueueDepth"=dword:00000001
+"MinimumDpcRate"=dword:00000001
+"DpcWatchdogPeriod"=dword:00000000
+"UnlimitDpcQueue"=dword:00000001
+
+;DPC Tweaks
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+"ForegroundBoost"=dword:00000001
+"ThreadBoostType"=dword:00000002
+"ThreadSchedulingModel"=dword:00000001
+"AdjustDpcThreshold"=dword:00000320
+"DeepIoCoalescingEnabled"=dword:00000001
+"IdealDpcRate"=dword:00000320
+"SchedulerAssistThreadFlagOverride"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games]
+"Affinity"=dword:00000000
+"Background Only"="False"
+"Clock Rate"=dword:00002710
+"GPU Priority"=dword:00000008
+"Priority"=dword:00000006
+"Scheduling Category"="High"
+"SFIO Priority"="High"
+"Latency Sensitive"="True"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\DisplayPostProcessing]
+"Affinity"=dword:00000000
+"Background Only"="True"
+"BackgroundPriority"=dword:00000018
+"Clock Rate"=dword:00002710
+"GPU Priority"=dword:00000012
+"Priority"=dword:00000008
+"Scheduling Category"="High"
+"SFIO Priority"="High"
+"Latency Sensitive"="True"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Audio]
+"Affinity"=dword:00000007
+"Background Only"="True"
+"Clock Rate"=dword:00002710
+"GPU Priority"=dword:00000008
+"Priority"=dword:00000006
+"Scheduling Category"="Medium"
+"SFIO Priority"="Normal"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
+"HiberbootEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+"AlwaysOn"=dword:00000001
+"NetworkThrottlingIndex"=dword:ffffffff
+"SystemResponsiveness"=dword:0000000a
+"NoLazyMode"=dword:00000001
+
+;Disable Spectre, Meltdown, and Downfall mitigations
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
+"FeatureSettingsOverride"=dword:2000003
+"FeatureSettingsOverrideMask"=dword:00000003
