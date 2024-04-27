@@ -32,7 +32,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
 "IRQ0Priority"=dword:00000001
 "IRQ8Priority"=dword:00000001
-"Win32PrioritySeparation"=dword:00000003
+"Win32PrioritySeparation"=dword:0000002a
 
 ;Disable core isolation memory integrity to fix stuttering and responsiveness
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
