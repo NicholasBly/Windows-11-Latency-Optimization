@@ -111,7 +111,7 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
 "AlwaysOn"=dword:00000001
-"NetworkThrottlingIndex"=dword:ffffffff
+"NetworkThrottlingIndex"=dword:0000000a
 "SystemResponsiveness"=dword:0000000a
 "NoLazyMode"=dword:00000001
 
