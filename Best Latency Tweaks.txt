@@ -269,6 +269,10 @@ Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class
 --New DWORD 32-bit: "DisableDynamicPstate"
 --Set value to 1
 ----Notes: This will increase idle power draw, however it will lock your GPU to its maximum frequency to improve latency during gaming. Variable core clocks introduce latency, so locking your GPU core benefits input latency
+
+--Alternatively, download "limit-nvpstate" and add your game executables to the list. Your PC will operate in P8 at the desktop/idle and run at very low GPU/Memory speeds.
+--This will save a lot of power, and only activate P0 when you're actively gaming. limit-nvpstate must be running before starting your game or else your GPU will stay locked
+at P8.
 }
 
 
@@ -331,25 +335,40 @@ Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm
 ---Scroll through remaining settings and disable more of them if you'd like
 
 15. WPD
---Disable everything, except for advanced tabs
+--Click "Disable" within "Telemetry"
+--Click "Block" within "Telemetry IPs"
+----Optionally, click "Apps" tabs to uninstall bundleware/bloatware (only if you know what you're doing!)
 
 16. Chris Titus Debloater
---Click Tweaks
---Recommended Selections: Desktop/Laptop
+
+Create shortcut on the desktop, put the location as "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe iwr -useb https://christitus.com/win | iex"
+--Double Click the shortcut to open the tool
+
+--Click Tweaks Tab
+--Recommended Selections: Click Desktop or Laptop
 --Uncheck Run OO Shutup (if you already ran OO Shutup)
+--Check "Disable Teredo" if you're not using IPv6
 
-17. MarkC Mouse Fix - run .reg based on Windows scaling %
-
+Advanced Tweaks
 Optional:
 --Remove OneDrive
 --Set Classic Right-Click Menu
 --Disable IPv6
 
+Customize Preferences
+Optional:
+--Bing search in start menu: Disable (if not using)
+--Mouse Acceleration: Disable
+--Sticky Keys: Disable (if not using)
+--Taskbar Widgets: Disable (if not using)
+
 --Click Run Tweaks
 
 Optional:
---Click Config
+--Click Config Tab
 --Run System Corruption Scan
+
+INFORMATION: Chris Titus tool overwrites some values in the registry regarding FSO, NetworkThrottlingIndex, and SystemResponsiveness. Please re-run the LatencyTweaks.reg file after you've run the Chris Titus tool.
 
 16. Enable Game Mode
 --Select Windows Start Button
@@ -369,6 +388,7 @@ Optional:
 Power Saving Mode -> Disabled
 Energy Efficient Ethernet -> Disabled
 Green Ethernet -> Disabled
+Interrupt Moderation -> Enabled
 Ultra Low Power Mode -> Disabled
 Offload (any) -> Disabled
 Receive Buffers -> 2048
