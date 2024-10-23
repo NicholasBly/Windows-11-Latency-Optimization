@@ -4,6 +4,11 @@ Prerequisites:
 --Shift + F10, type OOBE\BYPASSNRO
 -Select English (World) as language to not install bloatware
 
+--Mouse Firmware Tweaks--
+Motion Sync - Off (Finalmouse/other mice)
+Polling Rate - 1000hz
+Wired > wireless for latency, but probably not enough of a difference to notice
+
 --BIOS Optimizations/Non-Overclocks--
 fTPM -> Disable
 Re-Size BAR -> Enable
@@ -337,9 +342,49 @@ Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm
 15. WPD
 --Click "Disable" within "Telemetry"
 --Click "Block" within "Telemetry IPs"
-----Optionally, click "Apps" tabs to uninstall bundleware/bloatware (only if you know what you're doing!)
 
-16. Chris Titus Debloater
+Apps Tab
+--Delete GameBar (DO NOT CLICK DELETE ALL!!!!!!! - click "delete" after selecting "GameBar")
+----Verify that GameBar is gone by pressing Win + G
+------Optionally, uninstall any remaining bundleware/bloatware (only if you know what you're doing!)
+
+16. Privacy.sexy (https://privacy.sexy)
+--Install Program
+--Select Following Options
+
+Disable OS Data Collection
+--Disable Application Experience data collection
+--Disable Application Compatibility Framework
+--Disable Windows telemetry and data collection
+--Disable Windows Update data collection
+--Disable location access
+--Disable WIndows search data collection
+--Disable targeted advertisements and marketing
+--Disable cloud sync
+--Disable Recall
+--Disable active probing to Microsoft NCSI server
+--Opt out of Windows privacy consent
+--Disable Windows feedback collection
+--Disable automatic map downloads
+--Disable typing feedback (sends typing data)
+
+Configure Programs (only select programs you have installed / use, I list the ones I use here)
+--Disable Visual Studio data collection
+--Disable Visual Studio Code data collection
+--Disable Microsoft Office telemetry
+--Disable media player data collection
+--Disable NET Core CLI telemetry
+--Disable Powershell telemetry
+
+Security Improvements
+--Improve network security (if you have some older programs that give a 403 forbidden error, revert this tweak)
+
+Advanced Settings (optional, personal preference)
+--Set NTP (time) server to pool.ntp.org
+
+Feel free to explore more tweaks and try them out
+
+17. Chris Titus Debloater
 
 Create shortcut on the desktop, put the location as "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe iwr -useb https://christitus.com/win | iex"
 --Double Click the shortcut to open the tool
@@ -370,12 +415,12 @@ Optional:
 
 INFORMATION: Chris Titus tool overwrites some values in the registry regarding FSO, NetworkThrottlingIndex, and SystemResponsiveness. Please re-run the LatencyTweaks.reg file after you've run the Chris Titus tool.
 
-16. Enable Game Mode
+18. Enable Game Mode
 --Select Windows Start Button
 --Search "Game Mode Settings"
 --Turn on Game Mode
 
-17. Enable Optimizations for windowed games (Windows 11 22H2 and higher versions)
+19. Enable Optimizations for windowed games (Windows 11 22H2 and higher versions)
 --Select Windows Start Button
 --Search "Graphics Settings"
 --Click "Change default graphics settings"
@@ -384,7 +429,7 @@ INFORMATION: Chris Titus tool overwrites some values in the registry regarding F
 ----Hardware-accelerated GPU scheduling
 ----Optimizations for windowed games
 
-18. Network Optimizations
+20. Network Optimizations
 Power Saving Mode -> Disabled
 Energy Efficient Ethernet -> Disabled
 Green Ethernet -> Disabled
@@ -394,7 +439,7 @@ Offload (any) -> Disabled
 Receive Buffers -> 2048
 Transmit Buffers -> 4096
 
-19. Windows 11 FSO
+21. Windows 11 FSO
 -Utilize Fullscreen Optimization Mode for latency boost and smoothness (mimics fullscreen mode and makes it obsolete)
 [Computer\HKEY_CURRENT_USER\System\GameConfigStore]
 GameDVR_FSEBehavior = 0
