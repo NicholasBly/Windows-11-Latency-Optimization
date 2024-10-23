@@ -26,13 +26,25 @@ Windows Registry Editor Version 5.00
 "GameDVR_FSEBehaviorMode"=dword:00000000
 "GameDVR_HonorUserFSEBehaviorMode"=dword:00000000
 
+;Disable GameBar
+[Computer\HKEY_CURRENT_USER\Software\Microsoft\GameBar]
+"AutoGameModeEnabled"=dword:00000000
+
+;Disable GameDVR
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR]
+"value"=dword:00000000
+
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
 "LargeSystemCache"=dword:00000001
+"DisablePagingExecutive"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
 "IRQ0Priority"=dword:00000001
 "IRQ8Priority"=dword:00000001
-"Win32PrioritySeparation"=dword:0000002a
+"Win32PrioritySeparation"=dword:00000016
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Power]
+"PowerThrottlingOff"=dword:00000001
 
 ;Disable core isolation memory integrity to fix stuttering and responsiveness
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
@@ -109,6 +121,22 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
 "HiberbootEnabled"=dword:00000000
 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
+"EventProcessorEnabled"=dword:00000000
+"HibernateEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+"TdrLevel"=dword:00000000
+"TdrDebugMode"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimation\TaggedEnergy]
+"DisableTaggedEnergyLogging"=dword:00000001
+"TelemetryMaxApplication"=dword:00000000
+"TelemetryMaxTagPerApplication"=dword:00000000
+
+[Computer\HKEY_CURRENT_USER\Software\Microsoft\MediaPlayer\Preferences]
+"UsageTracking"=dword:00000000
+
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
 "AlwaysOn"=dword:00000001
 "NetworkThrottlingIndex"=dword:0000000a
@@ -119,3 +147,16 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
 "FeatureSettingsOverride"=dword:2000003
 "FeatureSettingsOverrideMask"=dword:00000003
+
+;Disable Xbox Services
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XblAuthManager]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XblGameSave]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XboxGipSvc]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XboxNetApiSvc]
+"Start"=dword:00000004
