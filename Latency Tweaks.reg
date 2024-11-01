@@ -5,9 +5,13 @@ Windows Registry Editor Version 5.00
 "CpuPriorityClass"=dword:00000003
 "IoPriority"=dword:00000003
 
-; Fortnite high priority (Only Battleye version will apply)
+; Fortnite high priority
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe\PerfOptions]
 "CpuPriorityClass"=dword:00000003
+"IoPriority"=dword:00000003
+
+; IO Priority carries over to Fortnite executable
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fortniteclient-win64-shipping_eac_eos.exe\PerfOptions]
 "IoPriority"=dword:00000003
 
 ; Timer Resolution Win11 Fix
