@@ -152,6 +152,12 @@ Windows Registry Editor Version 5.00
 "FeatureSettingsOverride"=dword:2000003
 "FeatureSettingsOverrideMask"=dword:00000003
 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
+"Tcp1323Opts"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters]
+"DisabledComponents"=dword:00000020
+
 ;Disable Xbox Services
 [HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\XblAuthManager]
 "Start"=dword:00000004
