@@ -41,14 +41,14 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
 "LargeSystemCache"=dword:00000001
 "DisablePagingExecutive"=dword:00000001
+;Disable Spectre, Meltdown, and Downfall mitigations
+;"FeatureSettingsOverride"=dword:2000003
+;"FeatureSettingsOverrideMask"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
 "IRQ0Priority"=dword:00000001
 "IRQ8Priority"=dword:00000001
 "Win32PrioritySeparation"=dword:00000016
-
-[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Power]
-"PowerThrottlingOff"=dword:00000001
 
 ;Disable core isolation memory integrity to fix stuttering and responsiveness
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
@@ -125,10 +125,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
 "HiberbootEnabled"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
-"EventProcessorEnabled"=dword:00000000
-"HibernateEnabled"=dword:00000000
-
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
 "TdrLevel"=dword:00000000
 "TdrDebugMode"=dword:00000000
@@ -138,6 +134,11 @@ Windows Registry Editor Version 5.00
 "TelemetryMaxApplication"=dword:00000000
 "TelemetryMaxTagPerApplication"=dword:00000000
 
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
+"EventProcessorEnabled"=dword:00000000
+"HibernateEnabled"=dword:00000000
+"PowerThrottlingOff"=dword:00000001
+
 [Computer\HKEY_CURRENT_USER\Software\Microsoft\MediaPlayer\Preferences]
 "UsageTracking"=dword:00000000
 
@@ -146,11 +147,6 @@ Windows Registry Editor Version 5.00
 "NetworkThrottlingIndex"=dword:0000000a
 "SystemResponsiveness"=dword:0000000a
 "NoLazyMode"=dword:00000001
-
-;Disable Spectre, Meltdown, and Downfall mitigations
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management]
-"FeatureSettingsOverride"=dword:2000003
-"FeatureSettingsOverrideMask"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
 "Tcp1323Opts"=dword:00000001
