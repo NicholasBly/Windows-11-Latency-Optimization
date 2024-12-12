@@ -20,7 +20,7 @@ Every time you upgrade your graphics driver you need to re-apply these settings:
 1) Nvidia Control Panel – if you selected a 'clean' install you will need to redo the settings
    -To apply recommended settings, use Nvidia Profile Inspector and import the profile .nip file within this GitHub project.
    -Alternatively, use Nvidia Profile Inspector to save your profile before updating graphics drivers to have a one-click option after updating.
-3) MSI Mode – Automatically enabled for you if you use NVCleanstall (and automatic if using a 30xx or 40xx graphics card)
+3) MSI Mode – Automatically enabled for you if you use NVCleanstall (and automatic if using a 30xx or 40xx graphics card or newer)
 4) Processor Affinities – Automatically enabled for you if you use NVCleanstall's processor affinities option
 5) DisableDynamicPstate – Run the "Disable_P-States.bat" file as a one-click option for writing the registry value
 6) IRQ Priority – Check the IRQ value in MSInfo for your graphics card.
