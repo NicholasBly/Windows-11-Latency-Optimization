@@ -5,7 +5,7 @@
 4. Winget will show all the programs on your PC that have updates
 5. Type "winget upgrade --all" to update everything
 6. Type "winget upgrade <ID>" and replace ID with the ID of the program listed.
-7. To upgrade all without selected programs, pin the program using the syntax "winget pin add --id <ID> --version <0.70.*>", replacing the values in <> with your ID and optionally a version number.
+7. To upgrade all without selected programs, pin the program using the syntax "winget pin add --id "ID" --version "0.70.*"", replacing the values in quotes with your ID and optionally a version number.
 
 ## Windows Update Settings
 1. Run O&O Shutup 10++, check for changes made by Windows.
