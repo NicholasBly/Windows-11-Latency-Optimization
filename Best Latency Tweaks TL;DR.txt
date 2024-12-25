@@ -1,0 +1,45 @@
+TL;DR: Best, most impactful tweaks
+1. Win32PrioritySeparation: Try values 0x16, 0x28, 0x2A
+
+2. ProcessLasso game exe: I/O Priority -> Always -> High, CPU Priority -> Always -> High
+--For EAC games, including Fortnite, you must set I/O Priority to the eac_eos.exe, because EAC prevents it for the game executable, however setting priority to the eac_eos.exe, it will carry over to the game.
+
+If not using ProcessLasso this can be achieved through a registry entry:
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fortniteclient-win64-shipping_eac_eos.exe\PerfOptions]
+"IoPriority"=dword:00000003
+
+3. Disable Xbox Game Bar, uninstall with Windows Privacy Dashboard (WPD)
+--Pressing Win + G will not do anything if successful.
+----DO NOT disable/uninstall Game Bar if you use a multi-CCD CPU, like the 7950X3D, as it is required for proper gaming functionality.
+
+4. TweakedBitsum.pow power plan, tweaked by me. Includes some important CPU latency reducing settings.
+
+5. Tweaked Nvidia Profile Inspector Profile: 457-30-and-above-tweaked-by-Nicholas-Bly.nip 
+
+6. Bios settings to reduce latency
+Settings to Disable (based on ASRock bios options, but just search for them in your bios)
+
+C-States
+DF-States
+Fast Boot
+SVM / Virtualization
+IOMMU
+Memory Context Restore + Power Down Mode (DDR5 systems)
+TSME
+SMEE
+Data Scramble
+Disable iGPU
+
+7. Monitor settings
+-Overdrive: Extreme
+-Game Mode: Enabled
+
+8. Mouse settings
+-Motion Sync - Off
+-Polling Rate - 1000hz
+
+9. LatencyTweaks.reg file
+
+10. Run O&O Shutup 10++ and WPD recommended settings
+
+11. Chris Titus WinUtil: Set services to manual (debloats all useless Windows services, will not impact any programs as services are not disabled but simply set to manual so they will run when they are needed by specific programs)
