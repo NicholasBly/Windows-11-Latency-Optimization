@@ -1,9 +1,6 @@
 @echo off
-for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
-	for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Enum\%%i" /v "Driver"') do (
-		for /f %%i in ('echo %%a ^| findstr "{"') do (
-		     Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f > nul 2>&1
-                   )
-                )
-             )        
+echo Disabling Dynamic P-state for GPUs...
+powershell -Command "$gpuDevices = Get-WmiObject Win32_VideoController | Where-Object { $_.PNPDeviceID -match 'PCI\\VEN_' }; foreach ($gpu in $gpuDevices) { Write-Host 'Processing GPU:' $gpu.Name; $driverKey = (Get-ItemProperty \"HKLM:\SYSTEM\CurrentControlSet\Enum\$($gpu.PNPDeviceID)\" -Name 'Driver').Driver; if ($driverKey -match '{.*}') { $regPath = \"HKLM:\SYSTEM\CurrentControlSet\Control\Class\$driverKey\"; Write-Host 'Setting registry key at:' $regPath; Set-ItemProperty -Path $regPath -Name 'DisableDynamicPstate' -Value 1 -Type DWord; Write-Host 'Dynamic P-state disabled successfully' } }"
+echo.
+echo Complete! Press any key to exit...
 pause
