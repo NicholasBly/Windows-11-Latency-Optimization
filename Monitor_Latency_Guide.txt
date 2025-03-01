@@ -1,0 +1,5 @@
+CRU (Custom Resolution Utility) Display ID 2.0 to reduce input lag guide - https://www.youtube.com/watch?v=yq4zXrIJm44
+
+Further panel tweaks:
+Overdrive: Maximum
+Game Mode: On
