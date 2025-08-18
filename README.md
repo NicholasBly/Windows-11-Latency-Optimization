@@ -11,7 +11,7 @@ For laptop systems, these tweaks are not recommended on battery, as they are des
 
 Two great programs, [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate), and [ProcessLasso](https://bitsum.com/), can help preserve battery, power, and reduce system heat while still retaining 100% of the performance.
 
-++ limit-nvpstate works alongside the GlobalTimerResolution setting to only run the GPU at full speed when specific games/apps are added to a list. That way, your GPU isn't running full speed at all times.
+++ limit-nvpstate works alongside the DisableDynamicPState setting to only run the GPU at full speed when specific games/apps are added to a list. That way, your GPU isn't running full speed at all times.
 
 ++ ProcessLasso has the IdleSaver feature to kick out of Bitsum Highest Performance when the system has been idle <x> amount of seconds.
 
