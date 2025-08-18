@@ -5,11 +5,11 @@ I set out to experiment and try different tweaks posted on the internet, along w
 
 I have incorporated the easiest and most impactful tweaks to apply to every desktop system here.
 
-For laptop systems, these tweaks are not recommended on battery, as they are designed to push the system to maximum performance, however they are expected to drain battery faster.
+For laptop systems, these tweaks are not recommended on battery, as they are designed to push the system to maximum performance, so they are expected to drain battery faster.
 
 ## Max performance with some energy savings
 
-Two great programs, [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate), and (ProcessLasso)[https://bitsum.com/], can help preserve battery, power, and reduce system heat while still retaining 100% of the performance.
+Two great programs, [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate), and [ProcessLasso](https://bitsum.com/), can help preserve battery, power, and reduce system heat while still retaining 100% of the performance.
 
 ++ limit-nvpstate works alongside the GlobalTimerResolution setting to only run the GPU at full speed when specific games/apps are added to a list. That way, your GPU isn't running full speed at all times.
 
