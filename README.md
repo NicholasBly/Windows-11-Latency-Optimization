@@ -15,6 +15,12 @@ Two great programs, [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpst
 
 ++ ProcessLasso has the IdleSaver feature to kick out of Bitsum Highest Performance when the system has been idle <x> amount of seconds.
 
+## Getting Started
+
+For a quick and easy guide, check out "Best Latency Tweaks TL;DR.txt"
+
+For a more in-depth guide to utilize all of these tweaks, check out "Best Latency Tweaks.txt"
+
 ## Pushing Windows without fear of instability
 
 These tweaks do not interfere with system stability and are recommended to run on any Windows 11 system. It is not recommended on Windows 10 due to changes in features such as timer resolution and FSO.
